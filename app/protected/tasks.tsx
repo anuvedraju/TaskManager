@@ -35,19 +35,10 @@ export default function TaskListScreen() {
   const [selectedTasks, setSelectedTasks] = useState<string[]>([]);
   const [completedTasks, setCompletedTasks] = useState<string[]>([]);
 
-  const userIdRef = useRef(user?.userId);
-
-  // useEffect(() => {
-  //   if (userIdRef.current !== user?.userId && user?.userId) {
-  //     console.log("Fetching tasks for user:", user?.userId);
-  //     getTasks(user.userId);
-  //     userIdRef.current = user?.userId; // Store the last userId
-  //   }
-  // }, [user?.userId]);
 
   useEffect(() => {
     getTasks(user?.userId);
-  },[]);
+  },[user?.userId]);
 
   const getTasks = useCallback(async (userId: string) => {
     setLoading(true);

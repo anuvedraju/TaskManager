@@ -57,7 +57,7 @@ export default function LoginScreen() {
             token: loginResponse.accessToken,
           })
         );
-        router.replace("/protected/tasks");
+        await router.replace("/protected/tasks");
       } else {
         dispatch(loginFailure("Invalid email or password. Please try again."));
         dispatch(loginFailure("Invalid credentials"));

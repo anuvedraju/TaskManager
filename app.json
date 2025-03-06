@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/appIcon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anuved_raju.TaskManager"
     },
     "web": {
       "bundler": "metro",
@@ -44,7 +45,13 @@
     },
     "extra": {
       "API_URL": "https://taskmanagerserver-zctg.onrender.com",
-      "APP_ENV": "development"
+      "APP_ENV": "development",
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "787d8afb-9ada-474e-b68f-7c295c3ddf61"
+      }
     }
   }
 }

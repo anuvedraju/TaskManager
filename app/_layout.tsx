@@ -74,15 +74,12 @@ function AppNavigator() {
   const token = AsyncStorage.getItem("access_token");
   const dispatch = useDispatch();
   useEffect(() => {
-    const checkAuth = async () => {
-      const savedToken = await AsyncStorage.getItem("access_token");
-      if (savedToken) {
-        dispatch(loginSuccess({ user, token: savedToken }));
-        router.replace("/protected/tasks");
-      }
-    };
-    checkAuth();
-  }, [token]);
+    if (token === null) {
+      router.replace("/auth/login");
+    } else {
+      router.replace("/protected/tasks");
+    }
+  }, []);
   useEffect(() => {
     const loadUser = async () => {
       try {
