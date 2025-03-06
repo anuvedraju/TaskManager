@@ -8,19 +8,43 @@ import { logoutUser } from "@/api/authentication";
 import { useTheme } from "@/components/themecontext";
 import Header from "@/components/header";
 import { router } from "expo-router";
+import { clearStore } from "@/redux/slices/taskSlice";
+import { useDispatch } from "react-redux";
 
 const Menu = () => {
   const navigation = useNavigation();
   const { theme } = useTheme();
+  const dispatch = useDispatch();
 
   const menuItems = [
-    { name: "Account", icon: "profile", color: colors.primary, route: "/protected/profiledetails" },
-    { name: "Settings", icon: "settings", color: theme.colors.black, route: "/protected/profiledetails" },
-    { name: "Privacy and Security", icon: "lock", color: colors.success, route: "/protected/profiledetails" },
+    {
+      name: "Account",
+      icon: "profile",
+      color: colors.primary,
+      route: "/protected/profiledetails",
+    },
+    {
+      name: "Settings",
+      icon: "settings",
+      color: theme.colors.black,
+      route: "/protected/profiledetails",
+    },
+    {
+      name: "Privacy and Security",
+      icon: "lock",
+      color: colors.success,
+      route: "/protected/profiledetails",
+    },
   ];
+  const handleLogout = async () => {
+    await logoutUser();
+    dispatch(clearStore());
+  };
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <Header
         title="Menu"
         backgroundcolorx="primary"
@@ -30,11 +54,22 @@ const Menu = () => {
       />
 
       {menuItems.map(({ name, icon, color, route }) => (
-        <MenuButton key={name} icon={icon} text={name} color={color} onPress={() => router.push(route)} />
+        <MenuButton
+          key={name}
+          icon={icon}
+          text={name}
+          color={color}
+          onPress={() => router.push(route)}
+        />
       ))}
 
-      {/* Logout Button */}
-      <MenuButton icon="exit" text="Logout" color="#FF3B30" onPress={logoutUser} textColor="error" />
+      <MenuButton
+        icon="exit"
+        text="Logout"
+        color="#FF3B30"
+        onPress={handleLogout}
+        textColor="error"
+      />
     </View>
   );
 };

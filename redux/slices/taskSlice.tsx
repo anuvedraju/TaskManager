@@ -30,9 +30,14 @@ const taskSlice = createSlice({
     setTasksFromAPI: (state, action: PayloadAction<Tasks[]>) => {
       state.tasks = action.payload;
     },
+    clearStore() {
+        return initialState; // Resets entire store to initial state
+      },
+    
+    
   },
 });
 
-export const { addTask, updateTask, deleteTask, setTasksFromAPI } =
+export const { addTask, updateTask, deleteTask, setTasksFromAPI,clearStore } =
   taskSlice.actions;
 export default taskSlice.reducer;

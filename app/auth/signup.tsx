@@ -49,7 +49,7 @@ export default function SignupScreen() {
     }
     setError("");
     signup();
-    // console.log("Signing up with:", { formusername, email, password });
+
   };
 
   const signup = async () => {
@@ -81,7 +81,7 @@ export default function SignupScreen() {
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
       >
-        {/* Logo Section */}
+
         <LinearGradient
           colors={[theme.colors.background, theme.colors.background]}
           style={styles.logo}
@@ -96,7 +96,7 @@ export default function SignupScreen() {
           </Typography>
         </LinearGradient>
 
-        {/* Input Section */}
+
         <View style={styles.inputContainer}>
           <Typography
             style={styles.label}
@@ -130,7 +130,7 @@ export default function SignupScreen() {
             style={styles.button}
           />
 
-          {/* Divider */}
+
           <View style={styles.lineContainer}>
             <View style={styles.line} />
             <Typography size={10} style={styles.dividerText}>
@@ -139,7 +139,7 @@ export default function SignupScreen() {
             <View style={styles.line} />
           </View>
 
-          {/* Social Login */}
+
           <TouchableOpacity style={styles.socialLogin}>
             <Icon name="googlelogo" color={theme.colors.black} />
             <Typography size={10} style={{ margin: 5 }}>
@@ -147,7 +147,7 @@ export default function SignupScreen() {
             </Typography>
           </TouchableOpacity>
 
-          {/* Login Redirect */}
+
           <TouchableOpacity
             style={styles.registerButton}
             onPress={() => router.replace("/auth/login")}

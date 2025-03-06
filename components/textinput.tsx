@@ -147,6 +147,8 @@ const styles = StyleSheet.create({
   inputIcon: {
     position: "absolute",
     right: 0,
+    height:"100%",
+    justifyContent:'center',
     padding: 10,
   },
 });

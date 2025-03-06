@@ -8,6 +8,8 @@ import { User } from "../types/types";
 import { BASE_URL } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
+import { useDispatch } from "react-redux";
+import { clearStore } from "@/redux/slices/taskSlice";
 
 interface LoginParams {
   email: string;
