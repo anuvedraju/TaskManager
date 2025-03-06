@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   RefreshControl,
+  ActivityIndicator,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { useEffect, useState, useCallback, useMemo, useRef } from "react";
@@ -23,7 +24,7 @@ import CustomCheckBox from "@/components/check_box";
 
 export default function TaskListScreen() {
   const router = useRouter();
-  const user = useSelector((state:any) => state.auth.user, shallowEqual);
+  const user = useSelector((state: any) => state.auth.user, shallowEqual);
   const tasksFromStore = useSelector((state: any) => state.tasks?.tasks || []);
   const tasks = useMemo(() => [...tasksFromStore].reverse(), [tasksFromStore]);
   const dispatch = useDispatch();
@@ -36,13 +37,17 @@ export default function TaskListScreen() {
 
   const userIdRef = useRef(user?.userId);
 
+  // useEffect(() => {
+  //   if (userIdRef.current !== user?.userId && user?.userId) {
+  //     console.log("Fetching tasks for user:", user?.userId);
+  //     getTasks(user.userId);
+  //     userIdRef.current = user?.userId; // Store the last userId
+  //   }
+  // }, [user?.userId]);
+
   useEffect(() => {
-    if (userIdRef.current !== user?.userId && user?.userId) {
-      console.log("Fetching tasks for user:", user?.userId);
-      getTasks(user.userId);
-      userIdRef.current = user?.userId; // Store the last userId
-    }
-  }, [user?.userId]);
+    getTasks(user?.userId);
+  },[]);
 
   const getTasks = useCallback(async (userId: string) => {
     setLoading(true);
@@ -203,7 +208,9 @@ export default function TaskListScreen() {
               </Typography>
               <Icon name="emoji" color="grey" size={50} />
             </View>
-          ) : null
+          ) : (
+            <ActivityIndicator />
+          )
         }
       />
       <TouchableOpacity

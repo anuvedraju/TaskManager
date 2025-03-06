@@ -8,7 +8,7 @@ import { Provider, useDispatch, useSelector } from "react-redux";
 import store from "@/redux/store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { colors } from "@/utils/theme";
-import { loginSuccess} from "@/redux/slices/authSlice";
+import { loginSuccess } from "@/redux/slices/authSlice";
 SplashScreen.preventAutoHideAsync();
 
 const fetchFonts = () => {
@@ -74,11 +74,14 @@ function AppNavigator() {
   const token = AsyncStorage.getItem("access_token");
   const dispatch = useDispatch();
   useEffect(() => {
-    if (token === null) {
-      router.replace("/auth/login");
-    } else {
-      router.replace("/protected/tasks");
-    }
+    const checkAuth = async () => {
+      const savedToken = await AsyncStorage.getItem("access_token");
+      if (savedToken) {
+        dispatch(loginSuccess({ user, token: savedToken }));
+        router.replace("/protected/tasks");
+      }
+    };
+    checkAuth();
   }, [token]);
   useEffect(() => {
     const loadUser = async () => {
